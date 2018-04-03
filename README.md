@@ -1,5 +1,5 @@
-# Nota Mil
-Nota Mil é um jogo web de perguntas e respostas indicado para estudos de provas de vestibulares em geral.
+# QuestionUp
+QuestionUp é um jogo web de perguntas e respostas indicado para estudos de provas de vestibulares em geral.
 
 ## Desenvolvimento
 (Colocar instruções sobre o projeto)
@@ -34,8 +34,6 @@ Para ligar o servidor e poder acessar ele na web, é preciso que faça esse coma
 - HTML5
 - CSS3
   - [Materialize](http://materializecss.com/)
-- JavaScript
-  - [JQuery](https://jquery.com/)
 
 ## Autores
 * João Müller - Informática 301 - Instituto Federal Catarinense
