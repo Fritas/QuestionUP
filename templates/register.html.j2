@@ -1,0 +1,91 @@
+{% extends "base.html.j2" %}
+{% block head %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+	<title>Registrar</title>
+{% endblock head %}
+{% block content %}
+
+<!-- NavBar -->
+
+<nav class="#33691e light-green darken-4">
+	<div class="nav-wrapper">
+		<a href="{{ url_for('index') }}" class="brand-logo">QuestionUp</a>
+		<a href="" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="{{ url_for('index') }}">Inicio</a></li>
+			<li class="active"><a href="{{ url_for('registrar') }}">Registrar</a></li>
+			<li><a href="{{ url_for('entrar') }}">Entrar</a></li>
+		</ul>
+		<ul id="mobile" class="side-nav">
+			<li><a href="{{ url_for('index') }}">Index</a></li>
+			<li class="active"><a href="{{ url_for('registrar') }}">Registrar</a></li>
+			<li><a href="{{ url_for('entrar') }}">Entrar</a></li>
+		</ul>
+	</div>
+</nav>
+<!-- End NavBar -->
+
+<h5 class="center-align">Registrar</h5>
+<br>
+<form action="" method='POST'>
+	{{ form.csrf_token }}
+	<div class="row">
+		<div class="input-field col s6">
+			<label for="nome">Nome:</label>
+			{{ form.nome() }}
+			<span class="error">
+				{% if form.nome.errors %}
+					{% for erro in form.nome.errors %}
+						{{ erro }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s6">
+			{{ form.usuario() }}
+			<label for="usuario">Usuário:</label>
+			<span class="error">
+				{% if form.usuario.errors %}
+					{% for erro in for.usuario.errors %}
+						{{ erro }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s6">
+			{{ form.senha(class="validate") }}
+			<label for="senha">Senha:</label>
+			<span class="error">
+				{% if form.senha.errors %}
+					{% for erro in form.senha.errors %}
+						{{ erro }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s6">
+			<label for="confirmacao">Confirmar senha:</label>
+			{{ form.confirmacao() }}
+			<span class="error">
+				{% if form.confirmacao.errors %}
+					{% for erro in form.confirmacao.errors %}
+						{{ erro }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</div>
+	</div>
+	<div class="valign-wrapper">
+	<button class="btn #33691e light-green darken-4 valign lighten-2 waves-effect waves-greeen" type="submit">Registrar!</button>
+</div>
+</form>
+{% endblock content %}

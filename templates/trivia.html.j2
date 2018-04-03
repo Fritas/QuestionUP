@@ -1,0 +1,97 @@
+{% extends "base.html.j2" %}
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <title>Jogo</title>
+{% endblock head %}
+{% block content %}
+  <!-- Barra de navegação -->
+  <!-- Estrutura dropdown -->
+  <ul id="quizdropdown" class="dropdown-content">
+    <li><a href="{{ url_for('quiz') }}">GERAL</a></li>
+    <li><a href="#">Enem</a></li>
+  </ul>
+
+  <!-- Estrutura dropdown2 -->
+  <ul id="quizdropdown2" class="dropdown-content">
+    <li><a href="{{ url_for('quiz') }}">GERAL</a></li>
+    <li><a href="#">Enem</a></li>
+  </ul>
+
+  <nav class="#33691e light-green darken-4">
+    <div class="nav-wrapper">
+      <a href="{{ url_for('index') }}" class="brand-logo">QuestionUp</a>
+      <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a id="userscore" class="center-align teal-text text-darken-4" href="{{ url_for('ranking') }}">
+          {% if current_user.nome %}
+            Seu recorde é {{ current_user.recorde }}
+            {% if current_user.nome == usuarios[0].nome %}
+              <img src="/static/img/crown.svg" id="crown">
+            {% endif %}
+          {% endif %}</a></li>
+          <li><a href="{{ url_for('index') }}">Inicio</a></li>
+          <li class="active"><a class="dropdown-button" href="" data-activates="quizdropdown2">Questões<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
+          <li><a href="{{ url_for('ranking') }}">Ranking</a></li>
+          <li><a href="{{ url_for('sair') }}">Sair</a></li>
+      </ul>
+      <ul id="mobile-demo" class="side-nav">
+        <li><a id="userscore" class="center-align teal-text text-darken-4" href="{{ url_for('ranking') }}">
+          {% if current_user.nome %}
+            Seu recorede é {{ current_user.recorde }}
+            {% if current_user.nome == usuarios[0].nome %}
+              <img src="/static/img/crown.svg" id="crown">
+            {% endif %}
+          {% endif %}
+        </a></li>
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li class="active"><a class="dropdown-button" href="" data-activates="quizdropdown">Questões<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
+        <li><a href="{{ url_for('ranking') }}">Ranking</a></li>
+        <li><a href="{{ url_for('sair') }}">Sair</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h5 class="center-align">Responda as Questões</h5>
+  <h6>Escolha uma resposta e clique em enviar</h6>
+  <br>
+  <form action="" method="post">
+    {{ form.csrf_token }}
+    {% for questoes_disponiveis in questoes_disponiveis %}
+      <div class="{{ questoes_disponiveis.id_questao }}">
+        <div class="row">
+          <div class="col s12">
+            {{ questoes_disponiveis.questao }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            A: {{ questoes_disponiveis.opcao1 }}
+          </div>
+          <div class="col s6">
+            B: {{ questoes_disponiveis.opcao2 }}
+        </div>
+        <div class="row">
+          <div class="col s6">
+            C: {{ questoes_disponiveis.opcao3 }}
+          </div>
+        <div class="col s6">
+          D: {{ questoes_disponiveis.opcao4 }}
+        </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            {{ form.ja_respondido(class=questoes_disponiveis.id_criador) }}
+            <label for="ja_respondido">Selecione por uma opção:</label>
+          </div>
+        </div>
+        <button type="submit" name="btn waves-effect" id="">Confirmar valor</button>
+        </div>
+      </div>
+    {% endfor %}
+  </form>
+{% endblock content %}

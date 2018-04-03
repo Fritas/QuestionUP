@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% block head %}
+      <title>{% block title %}{% endblock %}</title>
+    {% endblock head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+  </head>
+  <body>
+      <!-- Template Filho (que será expandido) -->
+      {% block content %}{% endblock %}
+      <br>
+      
+      <!-- Colocar aqui um menu "universal" para todas as páginas"
+
+      <!-- Erros -->
+      {% if error %}
+        <p class="erro"><strong>Erro:</strong>{{ erro }}</p>
+      {% endif %}
+
+      <!-- Mensagens mostradas -->
+      {% for mensagem in get_flashed_messages() %}
+        <ul><li>{{ mensagem }}</li></ul>
+      {% endfor %}
+
+    </div>
+  </body>
+</html>

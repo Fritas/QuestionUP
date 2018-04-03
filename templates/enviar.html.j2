@@ -1,0 +1,43 @@
+{% extends "base.html.j2" %}
+{% block head %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}">\x3C/script>')</script>
+
+  <!-- Materialize, note: the js has to be loaded AFTER Jquery -->
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script type='text/JavaScript'>
+  $(document).ready(function() {
+    $('select').material_select();
+    $(".button-collapse").sideNav();
+  });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+
+  <title>Enviar</title>
+{% endblock head %}
+{% block content %}
+  <h5 class="center-align">Envie sua questão para ser adicionado em nosso banco de dados</h5>
+  <br>
+  <form action="" method="POST">
+    {{ form.csrf_token }}
+    <div class="input-field">
+      {{ form.questao(placeholder="Questão") }}
+      <label for="questao">Questão:</label>
+      <span class="error">
+        {% if form.questao.errors %}
+          {% for erro in form.questao.errors %}
+            {{ erro }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </div>
+  </form>
+{% endblock content %}
