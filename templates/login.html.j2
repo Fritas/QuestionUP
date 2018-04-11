@@ -31,24 +31,6 @@
 {% endblock head %}
 {% block content %}
 
-<!-- NavBar -->
-
-<nav class="#33691e light-green darken-4">
-	<div class="nav-wrapper">
-		<a href="{{ url_for('index') }}" class="brand-logo">QuestionUp</a>
-		<a href="" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-		<ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li><a href="{{ url_for('index') }}">Inicio</a></li>
-			<li><a href="{{ url_for('registrar') }}">Registrar</a></li>
-		</ul>
-		<ul id="mobile" class="side-nav">
-			<li><a href="{{ url_for('index') }}">Inicio</a></li>
-			<li><a href="{{ url_for('registrar') }}">Registrar</a></li>
-		</ul>
-	</div>
-</nav>
-<!-- End NavBar -->
-
 <h5 class="center-align">Entrar</h5>
 <br>
 <form action="" method='POST'>

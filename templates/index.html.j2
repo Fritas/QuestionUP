@@ -7,65 +7,7 @@
   <title>Inicio</title>
 {% endblock head %}
 {% block content %}
-  <!-- Barra de navegação -->
-  <!-- Estrutura dropdown -->
-  <ul id="quizdropdown" class="dropdown-content">
-    <li><a href="{{ url_for('quiz') }}">GERAL</a></li>
-    <li><a href="#">Enem</a></li>
-  </ul>
 
-  <!-- Estrutura dropdown2 -->
-  <ul id="quizdropdown2" class="dropdown-content">
-    <li><a href="{{ url_for('quiz') }}">GERAL</a></li>
-    <li><a href="#">Enem</a></li>
-  </ul>
-
-  <nav class="#33691e light-green darken-4">
-    <div class="nav-wrapper row">
-      <a href="{{ url_for('index') }}" class="brand-logo">QuestionUp</a>
-      <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a class="center-align teal-text text-darken-4" href="{{ url_for('ranking') }}">
-          {% if current_user.nome %}
-            Seu recorde é {{ current_user.recorde }}
-            {% if current_user.nome == usuarios[0].nome %}
-              <img src="/static/img/crown.svg" id="crown">
-            {% endif %}
-          {% endif %}</a></li>
-          <li class="active"><a href="{{ url_for('index') }}">Inicio</a></li>
-          <li><a class="dropdown-button" href="" data-activates="quizdropdown2">Questões<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
-          <li><a href="{{ url_for('ranking') }}">Ranking</a></li>
-          {% if current_user.nome %}
-            <li><a href="{{ url_for('sair') }}">Sair</a></li>
-          {% else %}
-            <li><a href="{{ url_for('entrar') }}">Entrar</a></li>
-            <li><a href="{{ url_for('registrar') }}">Registrar</a></li>
-          {% endif %}
-      </ul>
-      <ul id="mobile-demo" class="side-nav">
-        <li><a class="center-align teal-text text-darken-4" href="{{ url_for('ranking') }}">
-          {% if current_user.nome %}
-            Seu recorede é {{ current_user.recorde }}
-            {% if current_user.nome == usuarios[0].nome %}
-              <img src="/static/img/crown.svg" id="crown">
-            {% endif %}
-          {% endif %}
-        </a></li>
-        <li class="active"><a href="{{ url_for('index') }}">Inicio</a></li>
-        <li><a class="dropdown-button" href="" data-activates="quizdropdown">Questões<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
-        <li><a href="{{ url_for('ranking') }}">Ranking</a></li>
-        {% if current_user.nome %}
-          <li><a href="{{ url_for('sair') }}">Sair</a></li>
-        {% else %}
-          <li><a href="{{ url_for('entrar') }}">Entrar</a></li>
-          <li><a href="{{ url_for('registrar') }}">Registrar</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
-  <!-- Final da barra de navegação -->
   <div class="row">
     <div class="col s12">
       <div class="card #4caf50 green hoverable">
