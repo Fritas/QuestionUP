@@ -1,8 +1,9 @@
-from flask_wtf import Form
+from flask_wtf import Form as BaseForm
+from flask_wtf import FlaskForm as BaseForm
 from wtforms import TextField, PasswordField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo
 
-class RegistrarForm(Form):
+class RegistrarForm(BaseForm):
 	nome = TextField(
 		'nome',
 		validators=[DataRequired()]
@@ -20,11 +21,11 @@ class RegistrarForm(Form):
 		validators=[DataRequired(), EqualTo('senha', message='Senhas precisam ser iguais.')]
 	)
 
-class EntrarForm(Form):
+class EntrarForm(BaseForm):
 	usuario = TextField('usuario', validators=[DataRequired()])
 	senha = PasswordField('senha', validators=[DataRequired()])
 
-class EnviarForm(Form):
+class EnviarForm(BaseForm):
 	questao = TextField('questao', validators=[DataRequired()])
 	opcao1 = TextField('opcao1', validators=[DataRequired()])
 	opcao2 = TextField('opcao2', validators=[DataRequired()])
@@ -41,7 +42,7 @@ class EnviarForm(Form):
 		validators=[DataRequired()]
 	)
 
-class QuizForm(Form):
+class QuizForm(BaseForm):
 	resposta_escolhida = SelectField(
 		'resposta_escolhida',
 		choices=[('opcao1', 'A'), ('opcao2', 'B'), ('opcao3', 'C'), ('opcao4', 'D')],
