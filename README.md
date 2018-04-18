@@ -2,7 +2,7 @@
 QuestionUp é um jogo web de perguntas e respostas indicado para estudos de provas de vestibulares em geral.
 
 ## Desenvolvimento
-(Colocar instruções sobre o projeto)
+Atenção: O projeto está sendo postado no GitHub em versões. Você pode conferir as versões disponíveis através dos 'branches'.
 
 ### Pré-Requisitos
 (Colocar coisas necessárias para o funcionamento do projeto)
