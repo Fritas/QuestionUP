@@ -145,14 +145,14 @@ def pegar_resposta():
 
     if tentativa_questao[0].resposta == valor:
         recorde_atual = recorde_atual + 1
-        usuario_atual.recorde = recorde_atual
+        current_user.recorde = recorde_atual
         correto = 1
     else:
         recorde_atual = recorde_atual - 1
-        usuario_atual.recorde = recorde_atual
+        current_user.recorde = recorde_atual
         correto = 0
 
-    pickle_antes = usuario_atual.respondidas
+    pickle_antes = current_user.respondidas
     pickle_depois = loads(pickle_antes)
 
     pickle_depois.append(16)
@@ -160,6 +160,35 @@ def pegar_resposta():
     bd.session.commit()
 
     return jsonify(recorde=recorde_atual, correto=correto)
+
+@app.route('/jogo/<string:categoria>')
+@login_required
+def categoria_escolhida(categoria):
+    categorias = ['ENEM',
+                  'CFOAV',
+                  ]
+    if categoria in categorias:
+        form = QuizForm()
+        if current_user.respondidas is None:
+            current_user.respondidas = dumps([])
+            db.session.commit()
+
+        ja_respondido = loads(current_user.respondidas)
+        questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).filter(Questoes.id_questao.in_(ja_respondido)).filter(Questoes.categoria == categoria).all()
+
+        if len(questoes_disponiveis) is 0:
+            flash('Não foi possível encontrar questões para tal escolha')
+        return render_template('trivia.html.j2', questoes_disponiveis = questoes_disponiveis, form =  form, users = getStandings())
+    else:
+        form = QuizForm()
+        if current_user.respondidas is None:
+            current_user.respondidas = dumps([])
+            db.session.commit()
+
+        ja_respondido = loads(current_user.respondidas)
+        questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).filter(Questoes.id_questao.in_(ja_respondido)).all()
+        flash('Por favor entre em url onde a categoria é uma das' + str(categorias))
+        return redirect(url_for('trivia.html.j2', questoes_disponiveis = questoes_disponiveis, form = form, users = getStandings()))
 
 @app.route('/ranking')
 @login_required

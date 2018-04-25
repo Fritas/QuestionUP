@@ -1,7 +1,7 @@
 class BaseConfig(object):
     DEBUG = False
     SECRET_KEY = 'algo_secreto'
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:3003@localhost:3306/questionup'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:muller231369@localhost:3306/questionup'
     WTF_CSRF_SECRET_KEY = 'algo_secreto'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
