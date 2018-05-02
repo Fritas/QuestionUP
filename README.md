@@ -44,12 +44,12 @@ Para ligar o servidor e poder acessar ele na web, é preciso que faça esse coma
 - [ ] Criar sistema multi-jogador
 - [ ] Hospedar em um servidor dedicado
 - [ ] Criar sistema de perguntas de forma aleátoria
-- [ ] Criar uma logotipo para o projeto
-- [ ] Criar página de registro de perguntas
+- [x] Criar uma logotipo para o projeto
+- [/] Criar página de registro de perguntas
 - [ ] Criar página do ranking geral
-- [ ] Criar um banco de dados em MySQL
+- [x] Criar um banco de dados em MySQL
 - [ ] Criar página principal do jogo
-- [ ] Aperfeiçoar páginas
+- [/] Aperfeiçoar páginas
 - [x] Criar página de registro
 - [x] Criar página de login
 - [x] Criar página inicial
