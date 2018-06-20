@@ -76,12 +76,12 @@ def entrar():
     return render_template('login.html.j2', form=form)
 
 # Traça uma rota web à página de registro
-@app.route('/registrar')
+@app.route('/registrar', methods=['GET', 'POST'])
 def registrar():
     form = RegistrarForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            usuario = Usuario(nome=form.nome.data, usuario=form.usuario.data, senha=form.senha.data, recorde=0)
+            usuario = Usuario(nome=form.nome.data, usuario=form.usuario.data, senha=form.senha.data, recorde=0, perm_acesso=0)
             bd.session.add(usuario)
             bd.session.commit()
             login_user(usuario)
@@ -164,8 +164,9 @@ def pegar_resposta():
 @app.route('/jogo/<string:categoria>')
 @login_required
 def categoria_escolhida(categoria):
-    categorias = ['ENEM',
-                  'CFOAV',
+    categorias = ['enem',
+                  'cfoav',
+                  'detran',
                   ]
     if categoria in categorias:
         form = QuizForm()

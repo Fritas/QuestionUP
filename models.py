@@ -1,20 +1,22 @@
 from server import bd
 
 class Usuario(bd.Model):
-	__tablename__= 'tbl_usuarios'
+	__tablename__= 'usuario'
 
 	id = bd.Column(bd.Integer, primary_key=True)
 	nome = bd.Column(bd.String(20), nullable=False)
 	usuario = bd.Column(bd.String(20), nullable=False)
 	senha = bd.Column(bd.String(20), nullable=False)
 	recorde = bd.Column(bd.Integer, nullable=False)
+	perm_acesso = bd.Column(bd.Integer, nullable=False)
 	respondidas = bd.Column(bd.PickleType)
 
-	def __init__(self, nome, usuario, senha, recorde):
+	def __init__(self, nome, usuario, senha, recorde, perm_acesso):
 		self.nome = nome
 		self.usuario = usuario
 		self.senha = senha
 		self.recorde = recorde
+		self.perm_acesso = perm_acesso
 
 	def is_authenticated(self):
 		return True
@@ -32,7 +34,7 @@ class Usuario(bd.Model):
 		return "<O usuário é '%s'" %(self.usuario)
 
 class Questoes(bd.Model):
-	__tablename__ = 'tbl_questoes'
+	__tablename__ = 'questao'
 
 	questao = bd.Column(bd.String(500), nullable=False)
 	opcao1 = bd.Column(bd.String(250), nullable=False)

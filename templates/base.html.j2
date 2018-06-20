@@ -14,6 +14,21 @@
 
   </head>
   <body>
+
+    <ul id="quizdropdown" class="dropdown-content">
+      <li><a href=""> Questoes</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'enem') }}">ENEM</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'cfoav') }}">CFOAV</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'detran') }}">DETRAN</a></li>
+    </ul>
+    
+    <ul id="quizdropdown2" class="dropdown-content">
+      <li><a href=""> Questoes</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'enem') }}">ENEM</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'cfoav') }}">CFOAV</a></li>
+      <li><a href="{{ url_for('categoria_escolhida', categoria = 'detran') }}">DETRAN</a></li>
+    </ul>
+
       <!-- Colocar aqui um menu "universal" para todas as páginas -->
       <nav class="#33691e light-green darken-4">
         <div class="nav-wrapper row">
@@ -30,7 +45,9 @@
               <li><a href="{{ url_for('index') }}">Inicio</a></li>
               {% if current_user.nome %}
                 <li><a class="dropdown-button" href="" data-activates="quizdropdown2">Questões<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
+                {% if current_user.perm_acesso == 1 %}
+                  <li><a href="{{ url_for('enviar') }}">Adicionar Questões</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('ranking') }}">Ranking</a></li>
                 <li><a href="{{ url_for('sair') }}">Sair</a></li>
               {% else %}

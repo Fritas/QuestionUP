@@ -39,5 +39,80 @@
         {% endif %}
       </span>
     </div>
+    <div class="row">
+      <div class="input-field col s6">
+        {{ form.opcao1(placeholder="Opção A") }}
+        <label for="opcao1">A:</label>
+        <span class="error">
+          {% if form.opcao1.errors %}
+            {% for erro in form.opcao1.errors %}
+              {{ erro }}
+            {% endfor %}
+          {% endif %}
+        </span>
+      </div>
+      <div class="input-field col s6">
+        {{ form.opcao2(placeholder="Opção B") }}
+        <label for="opcao2">B:</label>
+        <span class="error">
+          {% if form.opcao2.errors %}
+            {% for erro in form.opcao2.errors %}
+              {{ erro }}
+            {% endfor %}
+          {% endif %}
+        </span>
+      </div>
+      <div class="input-field col s6">
+        {{ form.opcao3(placeholder="Opção C") }}
+        <label for="opcao3">C:</label>
+        <span class="error">
+          {% if form.opcao3.errors %}
+            {% for erro in form.opcao3.errors %}
+              {{ erro }}
+            {% endfor %}
+          {% endif %}
+        </span>
+      </div>
+      <div class="input-field col s6">
+        {{ form.opcao4(placeholder="Opção D") }}
+        <label for="opcao4">D:</label>
+        <span class="error">
+          {% if form.opcao4.errors %}
+            {% for erro in form.opcao4.errors %}
+              {{ erro }}
+            {% endfor %}
+          {% endif %}
+        </span>
+      </div>
+    </div>
+    
+    <div class="input-field">
+      {{ form.resposta(placeholder="Resposta") }}
+      <label for="resposta">Resposta Correta:</label>
+      <span class="error">
+        {% if form.resposta.errors %}
+          {% for erro in form.resposta.errors %}
+            {{ erro }}
+          {% endfor %}
+        {% endif %}
+      </span>      
+    </div>
+
+    <div class="input-field">
+      {{ form.categoria(placeholder="Categoria") }}
+      <label for="categoria">Categoria:</label>
+      <span class="error">
+        {% if form.categoria.errors %}
+          {% for erro in form.categoria.errors %}
+            {{ erro}}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </div>
+
+    <div class="valign-wrapper">
+      <button class="valign btn-large waves-effect waves-light" type="submit">Add questão</button>
+    </div>
+
   </form>
 {% endblock content %}
