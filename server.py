@@ -172,7 +172,7 @@ def categoria_escolhida(categoria):
         form = QuizForm()
         if current_user.respondidas is None:
             current_user.respondidas = dumps([])
-            db.session.commit()
+            bd.session.commit()
 
         ja_respondido = loads(current_user.respondidas)
         questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).filter(Questoes.id_questao.in_(ja_respondido)).filter(Questoes.categoria == categoria).all()
@@ -184,7 +184,7 @@ def categoria_escolhida(categoria):
         form = QuizForm()
         if current_user.respondidas is None:
             current_user.respondidas = dumps([])
-            db.session.commit()
+            bd.session.commit()
 
         ja_respondido = loads(current_user.respondidas)
         questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).filter(Questoes.id_questao.in_(ja_respondido)).all()

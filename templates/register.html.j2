@@ -54,7 +54,7 @@
 			<label for="usuario">Usuário</label>
 			<span class="error">
 				{% if form.usuario.errors %}
-					{% for erro in for.usuario.errors %}
+					{% for erro in form.usuario.errors %}
 						{{ erro }}
 					{% endfor %}
 				{% endif %}
