@@ -114,7 +114,7 @@ def enviar():
             categoria=form.categoria.data
         )
         bd.session.add(questao_data)
-        bd.session.commit
+        bd.session.commit()
         flash('Sua questao foi enviada para o servidor')
         return render_template('enviar.html.j2', form=form, usuarios=getStandings())
     return render_template('enviar.html.j2', form=form, usuarios=getStandings())
