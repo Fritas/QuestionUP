@@ -11,5 +11,5 @@ try:
     bd.session.add(Usuario('ble','ble','ble',0,1))
     bd.session.commit()
     print('O banco de dados foi montado!')
-except:
-    print('Algo ocorreu e não foi possível montar o banco de dados!')
+except Exception as erro:
+    print('Algo ocorreu e não foi possível montar o banco de dados! \nErro: ' + str(erro))

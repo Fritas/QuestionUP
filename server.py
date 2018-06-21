@@ -1,45 +1,18 @@
 from flask import Flask, render_template, flash, redirect, request, url_for, session, jsonify
-
-# Importar ferramentas de gerenciamento de login com o flask
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user, user_logged_in
-# Importar conector flask-mysql
-#from flask_mysql import MySQL
-
-# Não sei explicar ainda
 from flask_sqlalchemy import *
-#from flask_bcrypt import Bcrypt
-#from werkzeug import generate_password_hash, check_password_hash
 from pickle import *
-
-# Importar formularios
 from forms import EntrarForm, RegistrarForm, EnviarForm, QuizForm
 
-# Para criar a aplicação
 app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
-#app.secret_key = 'algo_secreto'
-
-# Para criar o objeto do banco de dados
 bd = SQLAlchemy(app)
-#mysql = MySQL()
-#app.config['MYSQL_DATABASE_USER'] = 'root'
-#app.config['MYSQL_DATABASE_PASSWORD'] = ''
-#app.config['MYSQL_DATABASE_DB'] = ''
-#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-#mysql.init_app(app)
 
-
-# Para criar o objeto bcrypt
-#bcrypt = Bcrypt(app)
-
-# Para importar os modelos após a criação da aplicação
 from models import *
 
-# Para criar o objeto do LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# Para configurar o objeto LoginManager
 login_manager.login_view = 'entrar'
 login_manager.login_message = 'Por favor entre em sua conta para visualizar esta página'
 
@@ -51,15 +24,13 @@ def getStandings():
     usuarios = Usuario.query.order_by(Usuario.recorde.desc())
     return usuarios
 
-# Traça a rota web à página inicial
 @app.route('/')
 def index():
     return render_template('index.html.j2', usuarios=getStandings())
 
-# Traça uma rota web à página de login
 @app.route('/entrar', methods=['GET', 'POST'])
 def entrar():
-    erro = None
+    logout_user()
     form = EntrarForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -72,16 +43,20 @@ def entrar():
                 erro = 'Credenciais inválidas, tente novamente!'
         else:
             erro = 'Credenciais inválidas, tente novamente!'
-            render_template('login.html.j2', form=form, erro=erro)
+            return render_template('login.html.j2', form=form, erro=erro)
     return render_template('login.html.j2', form=form)
 
-# Traça uma rota web à página de registro
 @app.route('/registrar', methods=['GET', 'POST'])
 def registrar():
     form = RegistrarForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            usuario = Usuario(nome=form.nome.data, usuario=form.usuario.data, senha=form.senha.data, recorde=0, perm_acesso=0)
+            usuario = Usuario(
+                nome=form.nome.data,
+                usuario=form.usuario.data,
+                senha=form.senha.data,
+                recorde=0, perm_acesso=0
+            )
             bd.session.add(usuario)
             bd.session.commit()
             login_user(usuario)
@@ -152,11 +127,11 @@ def pegar_resposta():
         current_user.recorde = recorde_atual
         correto = 0
 
-    pickle_antes = current_user.respondidas
-    pickle_depois = loads(pickle_antes)
+    beforePickle = current_user.respondidas
+    afterPickle = loads(beforePickle)
 
-    pickle_depois.append(16)
-    current_user.respondidas = dumps(pickle_depois)
+    afterPickle.append(id)
+    current_user.respondidas = dumps(afterPickle)
     bd.session.commit()
 
     return jsonify(recorde=recorde_atual, correto=correto)
@@ -166,8 +141,7 @@ def pegar_resposta():
 def categoria_escolhida(categoria):
     categorias = ['enem',
                   'cfoav',
-                  'detran',
-                  ]
+                  'detran',]
     if categoria in categorias:
         form = QuizForm()
         if current_user.respondidas is None:
@@ -197,6 +171,5 @@ def ranking():
     usuarios = Usuario.query.order_by(Usuario.recorde.desc())
     return render_template('ranking.html.j2', usuarios=usuarios)
 
-# Para inicializar o arquivo
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
