@@ -10,7 +10,7 @@
   <h5 class="center-align">Responda as Questões</h5>
   <h6>Escolha uma resposta e clique em enviar</h6>
   <br>
-  <form action="" method="post">
+  <form action="" method='POST'>
     {{ form.csrf_token }}
     {% for questoes_disponiveis in questoes_disponiveis %}
       <div class="{{ questoes_disponiveis.id_questao }}">
@@ -36,11 +36,13 @@
         </div>
         <div class="row">
           <div class="input-field col s6">
-            {{ form.ja_respondido(class=questoes_disponiveis.id_criador) }}
+            {{ form.ja_respondido(class=questoes_disponiveis.id_questao) }}
             <label for="ja_respondido">Selecione por uma opção:</label>
           </div>
         </div>
-        <button type="submit" name="btn waves-effect" id="">Confirmar valor</button>
+        <button class="btn waves-effect waves-light" type="submit" id="{{ questoes_disponiveis.id_questao }}">Confirmar Resposta</button>
+        <br>
+        <br>
         </div>
       </div>
     {% endfor %}
