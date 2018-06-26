@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>QuestionUP</title>
+{% endblock head %}
+
+{% block content %}
+    <div class="container-fluid" style="background: #cce5ff">
+        <div class="container" style="background: #ffc107; height: 500px; width: 500px;">
+
+            <form class="form-row justify-content-center pt-5">
+                <div class="form-group" style="width: 300px">
+                    <label for="den_usuario">Nickname</label>
+                    <input type="text" class="form-control" id="den_usuario" aria-describedby="guia_usuario" placeholder="Digite seu nickname para jogar ;-)">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-1" style="width:300px">Jogar</button> <br>
+                    <button type="submit" class="btn btn-primary" style="width:148px">Ranking</button>
+                    <button type="submit" class="btn btn-primary" style="width:149px">Instruções</button>
+                </div>
+            </form>
+        </div>
+        <hr>
+    </div>
+
+{% endblock content %}

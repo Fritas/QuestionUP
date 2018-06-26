@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block head %}
+        <title>Title</title>
+    {% endblock head %}
+
+    <!-- HEAD BASE -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+</head>
+<body>
+    <div class="navbar bg-light">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand justify-content-start" href="#">
+                QuestionUP
+            </a>
+        </nav>
+        <nav class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Ranking</a>
+            </li>
+        </nav>
+    </div>
+
+    <!-- ÁREA DE CONTEÚDO -->
+    {% block content %}{% endblock content %}
+    <br>
+
+
+    <!-- ÁREA DE ERROS -->
+    {% if error %}
+        <p class="error"><strong>Erro:</strong>{{ error }}</p>
+    {% endif %}
+
+    <!-- ÁREA DE MSG GERAIS -->
+    {% for mensagem in get_flashed_messages() %}
+        <ul><li>{{ mensagem }}</li></ul>
+    {% endfor %}
+
+    <!-- ÁREA DO RODAPÉ -->
+    <footer style="background:#1e7e34;height:150px">
+    </footer>
+</body>
+</html>
