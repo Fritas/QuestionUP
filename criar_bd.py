@@ -7,7 +7,7 @@ try:
     sql.execute('USE questionup')
 
     bd.create_all()
-    bd.session.add(Usuario('bla','bla','bla',0,0))
+    bd.session.add(Usuario('bla','bla','bla',9,0))
     bd.session.add(Usuario('ble','ble','ble',0,1))
     bd.session.commit()
     print('O banco de dados foi montado!')

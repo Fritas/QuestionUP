@@ -102,10 +102,12 @@ def quiz():
         current_user.respondidas = dumps([])
         bd.session.commit()
         questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).all()
+        print(questoes_disponiveis)
         return render_template('trivia.html.j2', questoes_disponiveis=questoes_disponiveis, form=form, usuarios=getStandings())
     else:
         ja_respondido = loads(current_user.respondidas)
         questoes_disponiveis = Questoes.query.filter(Questoes.id_criador != str(current_user.id)).filter(Questoes.id_questao.in_(ja_respondido)).all()
+        print(questoes_disponiveis)
         return render_template('trivia.html.j2', questoes_disponiveis=questoes_disponiveis, form=form, usuarios=getStandings())
 
 @app.route('/resposta')
@@ -153,7 +155,7 @@ def categoria_escolhida(categoria):
 
         if len(questoes_disponiveis) is 0:
             flash('Não foi possível encontrar questões para tal escolha')
-        return render_template('trivia.html.j2', questoes_disponiveis = questoes_disponiveis, form =  form, users = getStandings())
+            return render_template('trivia.html.j2', questoes_disponiveis = questoes_disponiveis, form =  form, users = getStandings())
     else:
         form = QuizForm()
         if current_user.respondidas is None:

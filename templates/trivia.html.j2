@@ -1,9 +1,22 @@
 {% extends "base.html.j2" %}
 {% block head %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}">\x3C/script>')</script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materialize.css') }}">
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type='text/JavaScript'>
+    $(document).ready(function() {
+    $('select').material_select();
+    $(".button-collapse").sideNav();
+    });
+    </script>
+
   <title>Jogo</title>
 {% endblock head %}
 {% block content %}
@@ -12,35 +25,35 @@
   <br>
   <form action="" method='POST'>
     {{ form.csrf_token }}
-    {% for questoes_disponiveis in questoes_disponiveis %}
-      <div class="{{ questoes_disponiveis.id_questao }}">
+    {% for questao_disponivel in questoes_disponiveis %}
+      <div class="{{ questao_disponivel.id_questao }}">
         <div class="row">
           <div class="col s12">
-            {{ questoes_disponiveis.questao }}
+            {{ questao_disponivel.questao }}
           </div>
         </div>
         <div class="row">
           <div class="col s6">
-            A: {{ questoes_disponiveis.opcao1 }}
+            A: {{ questao_disponivel.opcao1 }}
           </div>
           <div class="col s6">
-            B: {{ questoes_disponiveis.opcao2 }}
+            B: {{ questao_disponivel.opcao2 }}
         </div>
         <div class="row">
           <div class="col s6">
-            C: {{ questoes_disponiveis.opcao3 }}
+            C: {{ questao_disponivel.opcao3 }}
           </div>
         <div class="col s6">
-          D: {{ questoes_disponiveis.opcao4 }}
+          D: {{ questao_disponivel.opcao4 }}
         </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            {{ form.ja_respondido(class=questoes_disponiveis.id_questao) }}
+            {{ form.ja_respondido(class=questao_disponivel.id_questao) }}
             <label for="ja_respondido">Selecione por uma opção:</label>
           </div>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" id="{{ questoes_disponiveis.id_questao }}">Confirmar Resposta</button>
+        <button class="btn waves-effect waves-light" type="submit" id="{{ questao_disponivel.id_questao }}">Confirmar Resposta</button>
         <br>
         <br>
         </div>

@@ -4,6 +4,8 @@
     {% block head %}
       <title>{% block title %}{% endblock %}</title>
     {% endblock head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}">\x3C/script>')</script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materialize.css') }}">
     
@@ -11,6 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type='text/JavaScript'>
+    $(document).ready(function() {
+    $('select').material_select();
+    $(".button-collapse").sideNav();
+    });
+    </script>
 
   </head>
   <body>
@@ -27,7 +36,6 @@
       <li><a href="{{ url_for('categoria_escolhida', categoria = 'detran') }}">DETRAN</a></li>
     </ul>
 
-      <!-- Colocar aqui um menu "universal" para todas as páginas -->
       <nav class="#33691e light-green darken-4">
         <div class="nav-wrapper row">
           <a href="{{ url_for('index') }}" class="brand-logo left">QuestionUp</a>
@@ -35,7 +43,7 @@
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a class="center-align white-text">
               {% if current_user.nome %}
-                Seu recorde é {{ current_user.recorde }}
+                Olá {{ current_user.nome }}, seu recorde é {{ current_user.recorde }}
               {% endif %}</a></li>
               <li><a href="{{ url_for('index') }}">Inicio</a></li>
               {% if current_user.nome %}
@@ -53,7 +61,7 @@
           <ul id="mobile-demo" class="side-nav">
             <li><a class="center-align teal-text text-darken-4" href="{{ url_for('ranking') }}">
               {% if current_user.nome %}
-                Seu recorede é {{ current_user.recorde }}
+                Olá {{ current_user.nome }}, seu recorde é {{ current_user.recorde }}
               {% endif %}
             </a></li>
             <li class="active"><a href="{{ url_for('index') }}">Inicio</a></li>
@@ -84,6 +92,5 @@
         <ul><li>{{ mensagem }}</li></ul>
       {% endfor %}
 
-    </div>
   </body>
 </html>
